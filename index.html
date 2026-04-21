@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="top"></div>
+
+    <!-- Navbar -->
+     <nav>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-pill">
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+        </button>
+        <ul class="nav-pill" id="nav-pill">
+            <li><a href="index.html#top">Home</a></li>
+            <li><a href="index.html#about-me">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch theme">
+            <span class="theme-toggle-orb" id="theme-toggle-orb"></span>
+        </button>
+     </nav>
+
+     <!-- Home -->
+    <section id="home" class="home">
+        <div class="hero-content">
+        <img src="image.jpg.jpg" alt="profile" class="profile-img" id="profile-image">
+        <div class="hero-text">
+            <h1 class="hero-name">Raj Anand Jha</h1>
+            <div class="hero-role">
+                <p class="hero-role-label">I AM A</p>
+                <p class="hero-role-dynamic" id="hero-role-dynamic"></p>
+            </div>
+            <p>CSIT student passionate about programming, problem-solving,<br>and building web projects while continuously growing my development skills.</p>
+            <div class="buttons">
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="github-button">
+                    <img src="github.svg" alt="GitHub" class="button-icon">
+                    <span>Github</span>
+                </a>
+                <a href="resume.pdf" download class="resume-button">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="button-icon download-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M5 19H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Download Resume</span>
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.facebook.com/share/1CPLt6DriE/" target="_blank" rel="noopener noreferrer" class="social-icon-link facebook-icon-link" aria-label="Facebook profile">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="social-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5 21V12.8H16.3L16.72 9.6H13.5V7.56C13.5 6.63 13.78 6 15.12 6H16.84V3.14C16.03 3.03 15.22 2.97 14.4 2.98C11.98 2.98 10.32 4.46 10.32 7.18V9.6H7.68V12.8H10.32V21H13.5Z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+    <section id="about-me" class="about fade-in">
+      <h2>About Me</h2>
+    <p>I am a CSIT student with a growing interest in technology and web development, currently exploring different areas of programming, design, and problem-solving. While I am still in the learning phase, I am continuously working on improving my skills through practice and small projects, especially in front-end development and basic programming concepts. I enjoy building simple websites and experimenting with how ideas can be turned into functional and visually clean interfaces. Like many beginners, I have faced challenges in staying consistent and sometimes find certain parts of programming less engaging, but I continue to push myself because I want to build a strong foundation for my future in tech. I am also learning how to manage time better alongside college life and morning routines, which helps me stay disciplined. My goal is to become more confident in full-stack development over time and to create meaningful projects that reflect both my learning and creativity.</p>
+    </section>
+
+    <section id="skills" class="skills fade-in">
+    <h2>Skills</h2>
+    <div class="skill-box">
+        <div class="skill-item">
+            <img src="c.svg" alt="C logo" class="skill-icon">
+            <span>C</span>
+        </div>
+        <div class="skill-item">
+            <img src="cpp.svg" alt="C++ logo" class="skill-icon">
+            <span>C++</span>
+        </div>
+        <div class="skill-item">
+            <img src="html.svg" alt="HTML logo" class="skill-icon">
+            <span>HTML</span>
+        </div>
+        <div class="skill-item">
+            <img src="css.svg" alt="CSS logo" class="skill-icon">
+            <span>CSS</span>
+        </div>
+        <div class="skill-item">
+            <img src="javascript.svg" alt="JavaScript logo" class="skill-icon">
+            <span>JavaScript</span>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="projects fade-in">
+    <h2>Projects</h2>
+    <div class="project-card">
+        <h3>COMING SOON</h3>
+        <p>Projects will be added here soon as I continue building and improving my portfolio.</p>
+    </div>
+
+</section>
+
+<section id="contact" class="contact fade-in">
+    <h2>Contact</h2>
+    <p class="contact-intro">Send me a message here and it will be delivered to my Gmail inbox.</p>
+    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="131a5f5f-e997-4e8c-b881-0fe0b383c198">
+        <input type="hidden" name="subject" value="New message from portfolio contact form">
+        <input type="hidden" name="from_name" value="Portfolio Website">
+        <input type="checkbox" name="botcheck" class="hidden-field" tabindex="-1" autocomplete="off">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+        <input type="text" name="user_subject" placeholder="Subject" required>
+        <textarea name="message" rows="6" placeholder="Write your message here" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <p class="contact-email">Or email me directly: <a href="mailto:shyamashyam53@gmail.com">shyamashyam53@gmail.com</a></p>
+</section>
+
+<div class="image-popup" id="image-popup">
+    <div class="image-popup-content">
+        <button type="button" class="image-popup-close" id="close-image-popup">Close</button>
+        <img src="image.jpg.jpg" alt="Full profile" class="full-profile-img">
+    </div>
+</div>
+
+<div class="success-popup" id="success-popup">
+    <div class="success-card">
+        <div class="success-icon">&#10003;</div>
+        <h3>Message Sent Successfully</h3>
+        <p>Thank you for reaching out. Your message has been sent to my inbox and I will get back to you soon.</p>
+        <button type="button" id="close-popup">Close</button>
+    </div>
+</div>
+
+<footer>
+</p>&copy; 2026 Raj anand jha
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
