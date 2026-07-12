@@ -4,6 +4,7 @@ const navLinks = document.getElementById("nav-links");
 const themeButton = document.getElementById("theme-toggle");
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
+const emailToast = document.getElementById("email-toast");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const savedTheme = localStorage.getItem("portfolio-theme");
@@ -100,6 +101,47 @@ contactForm.addEventListener("submit", async (event) => {
     button.disabled = false;
     button.innerHTML = originalText;
   }
+});
+
+const desktopEmailMode = window.matchMedia("(hover: hover) and (pointer: fine)");
+let emailToastTimer;
+
+async function copyEmailAddress(email) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(email);
+    return;
+  }
+
+  const temporaryInput = document.createElement("textarea");
+  temporaryInput.value = email;
+  temporaryInput.setAttribute("readonly", "");
+  temporaryInput.style.position = "fixed";
+  temporaryInput.style.opacity = "0";
+  document.body.appendChild(temporaryInput);
+  temporaryInput.select();
+  const copied = document.execCommand("copy");
+  temporaryInput.remove();
+  if (!copied) throw new Error("Copy failed");
+}
+
+document.querySelectorAll("a[href^='mailto:']").forEach((emailLink) => {
+  emailLink.addEventListener("click", async (event) => {
+    if (!desktopEmailMode.matches) return;
+
+    event.preventDefault();
+    const email = emailLink.getAttribute("href").replace(/^mailto:/, "").split("?")[0];
+
+    try {
+      await copyEmailAddress(email);
+      emailToast.textContent = `Email copied: ${email}`;
+    } catch {
+      emailToast.textContent = email;
+    }
+
+    emailToast.classList.add("show");
+    window.clearTimeout(emailToastTimer);
+    emailToastTimer = window.setTimeout(() => emailToast.classList.remove("show"), 3500);
+  });
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
