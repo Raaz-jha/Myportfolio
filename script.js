@@ -1,216 +1,105 @@
+const body = document.body;
+const menuButton = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+const themeButton = document.getElementById("theme-toggle");
 const contactForm = document.getElementById("contact-form");
-const successPopup = document.getElementById("success-popup");
-const closePopupButton = document.getElementById("close-popup");
-const resumeButton = document.querySelector(".resume-button");
-const profileImage = document.getElementById("profile-image");
-const imagePopup = document.getElementById("image-popup");
-const closeImagePopupButton = document.getElementById("close-image-popup");
-const fadeElements = document.querySelectorAll(".fade-in");
-const navPill = document.getElementById("nav-pill");
-const heroRoleDynamic = document.getElementById("hero-role-dynamic");
-const themeToggle = document.getElementById("theme-toggle");
-const menuToggle = document.getElementById("menu-toggle");
-const navLinks = navPill ? navPill.querySelectorAll("a") : [];
+const formStatus = document.getElementById("form-status");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (themeToggle) {
-    const savedTheme = window.localStorage.getItem("theme");
-    const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-    let currentTheme = savedTheme || preferredTheme;
+const savedTheme = localStorage.getItem("portfolio-theme");
+const initialTheme = savedTheme || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
 
-    const applyTheme = (theme) => {
-        document.body.setAttribute("data-theme", theme);
-    };
-
-    applyTheme(currentTheme);
-
-    themeToggle.addEventListener("click", () => {
-        currentTheme = currentTheme === "light" ? "dark" : "light";
-        applyTheme(currentTheme);
-        window.localStorage.setItem("theme", currentTheme);
-    });
+function applyTheme(theme) {
+  body.dataset.theme = theme;
+  const nextTheme = theme === "dark" ? "light" : "dark";
+  themeButton.setAttribute("aria-label", `Switch to ${nextTheme} theme`);
 }
 
-if (heroRoleDynamic) {
-    const rolePhrases = ["CSIT Student.", "Frontend Developer."];
-    let phraseIndex = 0;
-    let roleTimer;
+applyTheme(initialTheme);
 
-    const triggerRolePop = () => {
-        heroRoleDynamic.classList.remove("fade-out");
-        heroRoleDynamic.classList.remove("pop");
-        void heroRoleDynamic.offsetWidth;
-        requestAnimationFrame(() => {
-            heroRoleDynamic.classList.add("pop");
-        });
-    };
+themeButton.addEventListener("click", () => {
+  const nextTheme = body.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+  localStorage.setItem("portfolio-theme", nextTheme);
+});
 
-    const triggerRoleFadeOut = () => {
-        heroRoleDynamic.classList.remove("pop");
-        heroRoleDynamic.classList.remove("fade-out");
-        void heroRoleDynamic.offsetWidth;
-        requestAnimationFrame(() => {
-            heroRoleDynamic.classList.add("fade-out");
-        });
-    };
+menuButton.addEventListener("click", () => {
+  const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+  menuButton.setAttribute("aria-expanded", String(!isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+  navLinks.classList.toggle("open", !isOpen);
+});
 
-    const showRole = () => {
-        heroRoleDynamic.textContent = rolePhrases[phraseIndex];
-        triggerRolePop();
-        phraseIndex = (phraseIndex + 1) % rolePhrases.length;
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open navigation");
+  });
+});
 
-        window.clearTimeout(roleTimer);
-        roleTimer = window.setTimeout(() => {
-            triggerRoleFadeOut();
-        }, 1500);
-    };
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".nav-shell")) {
+    navLinks.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  }
+});
 
-    showRole();
-    window.setInterval(showRole, 2200);
+const revealObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+
+const navAnchors = [...navLinks.querySelectorAll("a")];
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    navAnchors.forEach((anchor) => {
+      const isActive = anchor.getAttribute("href") === `#${entry.target.id}`;
+      anchor.classList.toggle("active", isActive);
+      if (isActive) anchor.setAttribute("aria-current", "location");
+      else anchor.removeAttribute("aria-current");
+    });
+  });
+}, { rootMargin: "-30% 0px -60%", threshold: 0 });
+
+document.querySelectorAll("main section[id]").forEach((section) => sectionObserver.observe(section));
+
+if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
+  const glow = document.querySelector(".cursor-glow");
+  if (glow) {
+    window.addEventListener("pointermove", (event) => {
+      glow.style.left = `${event.clientX}px`;
+      glow.style.top = `${event.clientY}px`;
+    }, { passive: true });
+  }
 }
 
-if (navPill) {
-    const updateNavPillState = () => {
-        if (window.scrollY > 10) {
-            navPill.classList.add("scrolled");
-        } else {
-            navPill.classList.remove("scrolled");
-        }
-    };
+contactForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = contactForm.querySelector("button[type='submit']");
+  const originalText = button.innerHTML;
+  button.disabled = true;
+  button.textContent = "Sending…";
+  formStatus.textContent = "";
 
-    updateNavPillState();
-    window.addEventListener("scroll", updateNavPillState, { passive: true });
-}
+  try {
+    const response = await fetch(contactForm.action, { method: "POST", body: new FormData(contactForm) });
+    if (!response.ok) throw new Error("Request failed");
+    contactForm.reset();
+    formStatus.textContent = "Thanks — your message was sent successfully.";
+  } catch {
+    formStatus.textContent = "The form could not send. Please use the email link instead.";
+  } finally {
+    button.disabled = false;
+    button.innerHTML = originalText;
+  }
+});
 
-if (menuToggle && navPill) {
-    const closeMobileMenu = () => {
-        navPill.classList.remove("open");
-        menuToggle.classList.remove("active");
-        menuToggle.setAttribute("aria-expanded", "false");
-    };
-
-    menuToggle.addEventListener("click", () => {
-        const isOpen = navPill.classList.toggle("open");
-        menuToggle.classList.toggle("active", isOpen);
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-            if (window.innerWidth <= 700) {
-                closeMobileMenu();
-            }
-        });
-    });
-
-    window.addEventListener("resize", () => {
-        if (window.innerWidth > 700) {
-            closeMobileMenu();
-        }
-    });
-
-    document.addEventListener("click", (event) => {
-        if (window.innerWidth <= 700 && !navPill.contains(event.target) && !menuToggle.contains(event.target)) {
-            closeMobileMenu();
-        }
-    });
-}
-
-if (fadeElements.length > 0) {
-    const fadeObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.18) {
-                entry.target.classList.add("show");
-            } else if (entry.intersectionRatio < 0.03) {
-                entry.target.classList.remove("show");
-            }
-        });
-    }, {
-        threshold: [0, 0.03, 0.18, 0.35]
-    });
-
-    fadeElements.forEach((element) => {
-        fadeObserver.observe(element);
-    });
-}
-
-if (contactForm) {
-    contactForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const submitButton = contactForm.querySelector("button[type='submit']");
-        const formData = new FormData(contactForm);
-
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.textContent = "Sending...";
-        }
-
-        try {
-            const response = await fetch(contactForm.action, {
-                method: "POST",
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error("Message send failed");
-            }
-
-            contactForm.reset();
-
-            if (successPopup) {
-                successPopup.classList.add("show");
-            }
-        } catch (error) {
-            alert("Message could not be sent. Please try again.");
-        } finally {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = "Send Message";
-            }
-        }
-    });
-}
-
-if (closePopupButton && successPopup) {
-    closePopupButton.addEventListener("click", () => {
-        successPopup.classList.remove("show");
-    });
-
-    successPopup.addEventListener("click", (event) => {
-        if (event.target === successPopup) {
-            successPopup.classList.remove("show");
-        }
-    });
-}
-
-if (resumeButton) {
-    resumeButton.addEventListener("click", () => {
-        resumeButton.classList.remove("downloading");
-
-        requestAnimationFrame(() => {
-            resumeButton.classList.add("downloading");
-        });
-
-        window.setTimeout(() => {
-            resumeButton.classList.remove("downloading");
-        }, 800);
-    });
-}
-
-if (profileImage && imagePopup) {
-    profileImage.addEventListener("click", () => {
-        imagePopup.classList.add("show");
-    });
-}
-
-if (closeImagePopupButton && imagePopup) {
-    closeImagePopupButton.addEventListener("click", () => {
-        imagePopup.classList.remove("show");
-    });
-
-    imagePopup.addEventListener("click", (event) => {
-        if (event.target === imagePopup) {
-            imagePopup.classList.remove("show");
-        }
-    });
-}
+document.getElementById("year").textContent = new Date().getFullYear();

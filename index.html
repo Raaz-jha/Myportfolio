@@ -1,145 +1,192 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>My Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Raj Anand Jha — CSIT student and frontend developer building thoughtful, accessible web experiences.">
+  <meta name="theme-color" content="#0b0f14">
+  <title>Raj Anand Jha — CSIT Student & Frontend Developer</title>
+  <link rel="icon" href="html.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="top"></div>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <!-- Navbar -->
-     <nav>
-        <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-pill">
-            <span class="menu-toggle-line"></span>
-            <span class="menu-toggle-line"></span>
-            <span class="menu-toggle-line"></span>
-        </button>
-        <ul class="nav-pill" id="nav-pill">
-            <li><a href="index.html#top">Home</a></li>
-            <li><a href="index.html#about-me">About</a></li>
-            <li><a href="index.html#skills">Skills</a></li>
-            <li><a href="index.html#projects">Projects</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch theme">
-            <span class="theme-toggle-orb" id="theme-toggle-orb"></span>
-        </button>
-     </nav>
+  <header class="site-header" id="top">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Raj Anand Jha, home">
+        <span class="brand-mark">RJ</span>
+        <span class="brand-name">Raj Anand Jha</span>
+      </a>
 
-     <!-- Home -->
-    <section id="home" class="home">
-        <div class="hero-content">
-        <img src="image.jpg.jpg" alt="profile" class="profile-img" id="profile-image">
-        <div class="hero-text">
-            <h1 class="hero-name">Raj Anand Jha</h1>
-            <div class="hero-role">
-                <p class="hero-role-label">I AM A</p>
-                <p class="hero-role-dynamic" id="hero-role-dynamic"></p>
-            </div>
-            <p>CSIT student passionate about programming, problem-solving,<br>and building web projects while continuously growing my development skills.</p>
-            <div class="buttons">
-                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="github-button">
-                    <img src="github.svg" alt="GitHub" class="button-icon">
-                    <span>Github</span>
-                </a>
-                <a href="resume.pdf" download class="resume-button">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" class="button-icon download-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 3V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 19H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span>Download Resume</span>
-                </a>
-            </div>
-            <div class="social-links">
-                <a href="https://www.facebook.com/share/1CPLt6DriE/" target="_blank" rel="noopener noreferrer" class="social-icon-link facebook-icon-link" aria-label="Facebook profile">
-                    <svg aria-hidden="true" viewBox="0 0 24 24" class="social-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.5 21V12.8H16.3L16.72 9.6H13.5V7.56C13.5 6.63 13.78 6 15.12 6H16.84V3.14C16.03 3.03 15.22 2.97 14.4 2.98C11.98 2.98 10.32 4.46 10.32 7.18V9.6H7.68V12.8H10.32V21H13.5Z"/>
-                    </svg>
-                </a>
-            </div>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#journey">Journey</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section" id="home" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="status-dot"></span> Learning, building, improving</p>
+          <h1 id="hero-title">Building the web, <span>one thoughtful detail at a time.</span></h1>
+          <p class="hero-summary">I’m <strong>Raj Anand Jha</strong>, a CSIT student learning frontend development and programming by turning small ideas into clear, useful interfaces.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a>
+            <a class="button button-quiet" href="mailto:shyamashyam53@gmail.com">Start a conversation</a>
+          </div>
+          <dl class="hero-facts" aria-label="Quick facts">
+            <div><dt>Focus</dt><dd>Frontend development</dd></div>
+            <div><dt>Foundation</dt><dd>C, C++ & web basics</dd></div>
+            <div><dt>Approach</dt><dd>Learn by building</dd></div>
+          </dl>
         </div>
+
+        <div class="portrait-stage reveal" data-delay="1">
+          <div class="portrait-frame">
+            <img src="image.jpg.jpg" alt="Portrait of Raj Anand Jha" width="1080" height="1920">
+            <div class="portrait-caption"><span>CSIT student</span><strong>Frontend explorer</strong></div>
+          </div>
         </div>
-    </section>
-    
-    <section id="about-me" class="about fade-in">
-      <h2>About Me</h2>
-    <p>I am a CSIT student with a growing interest in technology and web development, currently exploring different areas of programming, design, and problem-solving. While I am still in the learning phase, I am continuously working on improving my skills through practice and small projects, especially in front-end development and basic programming concepts. I enjoy building simple websites and experimenting with how ideas can be turned into functional and visually clean interfaces. Like many beginners, I have faced challenges in staying consistent and sometimes find certain parts of programming less engaging, but I continue to push myself because I want to build a strong foundation for my future in tech. I am also learning how to manage time better alongside college life and morning routines, which helps me stay disciplined. My goal is to become more confident in full-stack development over time and to create meaningful projects that reflect both my learning and creativity.</p>
+      </div>
     </section>
 
-    <section id="skills" class="skills fade-in">
-    <h2>Skills</h2>
-    <div class="skill-box">
-        <div class="skill-item">
-            <img src="c.svg" alt="C logo" class="skill-icon">
-            <span>C</span>
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="section-heading reveal">
+        <p class="section-index">About</p>
+        <h2 id="about-title">Learning with purpose.</h2>
+      </div>
+      <div class="about-grid">
+        <p class="about-lead reveal">I’m building a strong foundation in technology through consistent practice, small projects, and thoughtful experimentation.</p>
+        <div class="about-copy reveal" data-delay="1">
+          <p>I am a CSIT student with a growing interest in technology and web development. I enjoy exploring programming, design, and problem-solving—especially the process of turning an idea into a functional, visually clean interface.</p>
+          <p>I’m currently strengthening my frontend and programming fundamentals while learning to manage college, routines, and focused practice. My long-term goal is to grow into full-stack development and create meaningful projects that reflect both learning and creativity.</p>
         </div>
-        <div class="skill-item">
-            <img src="cpp.svg" alt="C++ logo" class="skill-icon">
-            <span>C++</span>
+      </div>
+      <div class="principles reveal" aria-label="Working principles">
+        <article><h3>Stay curious</h3><p>Ask better questions and explore how things work.</p></article>
+        <article><h3>Build clearly</h3><p>Prefer simple, useful interfaces over unnecessary complexity.</p></article>
+        <article><h3>Improve often</h3><p>Treat every project as a chance to sharpen the foundation.</p></article>
+      </div>
+    </section>
+
+    <section class="section skills" id="skills" aria-labelledby="skills-title">
+      <div class="section-heading reveal">
+        <p class="section-index">Toolkit</p>
+        <h2 id="skills-title">What I work with.</h2>
+      </div>
+      <div class="skills-layout">
+        <div class="skill-visual reveal" aria-label="Current learning focus">
+          <p class="skill-kicker">Current focus</p>
+          <h3>Frontend foundations</h3>
+          <p>My toolkit connects programming fundamentals with practical interface work. I’m deliberately keeping it focused while I build depth.</p>
         </div>
-        <div class="skill-item">
-            <img src="html.svg" alt="HTML logo" class="skill-icon">
-            <span>HTML</span>
+        <div class="skill-list reveal" data-delay="1">
+          <article class="skill-row"><div><img src="html.svg" alt=""><span><strong>HTML</strong><small>Semantic structure</small></span></div><em>Web</em></article>
+          <article class="skill-row"><div><img src="css.svg" alt=""><span><strong>CSS</strong><small>Responsive layouts</small></span></div><em>Design</em></article>
+          <article class="skill-row"><div><img src="javascript.svg" alt=""><span><strong>JavaScript</strong><small>Interaction fundamentals</small></span></div><em>Logic</em></article>
+          <article class="skill-row"><div><img src="c.svg" alt=""><span><strong>C</strong><small>Programming foundations</small></span></div><em>Core</em></article>
+          <article class="skill-row"><div><img src="cpp.svg" alt=""><span><strong>C++</strong><small>Problem-solving practice</small></span></div><em>Core</em></article>
         </div>
-        <div class="skill-item">
-            <img src="css.svg" alt="CSS logo" class="skill-icon">
-            <span>CSS</span>
+      </div>
+    </section>
+
+    <section class="section journey" id="journey" aria-labelledby="journey-title">
+      <div class="section-heading reveal">
+        <p class="section-index">Journey</p>
+        <h2 id="journey-title">Where I am, and what comes next.</h2>
+      </div>
+      <div class="timeline reveal">
+        <article class="timeline-item current">
+          <div class="timeline-meta"><span>Now</span><em>Active</em></div>
+          <div><h3>CSIT studies & frontend practice</h3><p>Building confidence in core computer science concepts while creating small web experiences with HTML, CSS, and JavaScript.</p><ul><li>Responsive interface practice</li><li>Programming and problem solving</li><li>Time management and consistency</li></ul></div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-meta"><span>Next</span><em>Roadmap</em></div>
+          <div><h3>Full-stack foundations</h3><p>Progressing from polished interfaces toward application logic, data, and complete product workflows.</p><ul><li>Modern frontend framework</li><li>Backend and database basics</li><li>Deployed end-to-end projects</li></ul></div>
+        </article>
+      </div>
+      <!-- EDITABLE: Add institution, dates, internships, work experience or certifications here when available. -->
+      <p class="editor-note reveal">This section is ready for verified education, experience, and certifications as the journey grows.</p>
+    </section>
+
+    <section class="section projects" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading reveal">
+        <p class="section-index">Selected work</p>
+        <h2 id="projects-title">Projects and experiments.</h2>
+      </div>
+      <div class="project-grid">
+        <!-- EDITABLE: Replace these honest in-progress cards with real project details, links and screenshots. -->
+        <article class="project-card project-featured reveal">
+          <div class="project-body"><p class="project-type">Portfolio system · Current</p><h3>Personal Portfolio</h3><p>A responsive personal space designed to communicate skills, learning progress, and future projects with clarity.</p><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+        </article>
+        <article class="project-card reveal" data-delay="1">
+          <div class="project-body"><p class="project-type">Next build · Editable</p><h3>Project case study</h3><p>A reserved space for the next complete build—its challenge, process, decisions, and measurable outcome.</p><ul class="tags"><li>Coming soon</li></ul></div>
+        </article>
+        <article class="project-card reveal" data-delay="2">
+          <div class="project-body"><p class="project-type">Experiment · Editable</p><h3>Learning lab</h3><p>A future collection for small interface, interaction, and programming experiments made while learning.</p><ul class="tags"><li>Exploration</li></ul></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section services" aria-labelledby="services-title">
+      <div class="section-heading reveal">
+        <p class="section-index">Capabilities</p>
+        <h2 id="services-title">What I’m learning to deliver.</h2>
+      </div>
+      <div class="service-grid reveal">
+        <article><h3>Responsive websites</h3><p>Layouts that adapt cleanly across phones, tablets, and desktops.</p></article>
+        <article><h3>Interface implementation</h3><p>Translating visual ideas into structured, usable web pages.</p></article>
+        <article><h3>Interactive prototypes</h3><p>Adding purposeful motion and JavaScript-driven feedback.</p></article>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-panel reveal">
+        <div>
+          <p class="section-index">Contact</p>
+          <h2 id="contact-title">Have an idea?<br>Let’s start with hello.</h2>
+          <p>I’m open to learning opportunities, collaboration, and thoughtful conversations about technology and the web.</p>
+          <a class="email-link" href="mailto:shyamashyam53@gmail.com">shyamashyam53@gmail.com <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="skill-item">
-            <img src="javascript.svg" alt="JavaScript logo" class="skill-icon">
-            <span>JavaScript</span>
-        </div>
+        <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="post">
+          <input type="hidden" name="access_key" value="131a5f5f-e997-4e8c-b881-0fe0b383c198">
+          <input type="hidden" name="subject" value="New message from Raj's portfolio">
+          <input type="checkbox" name="botcheck" class="hidden-field" tabindex="-1" autocomplete="off">
+          <label>Name<input type="text" name="name" autocomplete="name" placeholder="Your name" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+          <label>Message<textarea name="message" rows="5" placeholder="Tell me a little about your idea..." required></textarea></label>
+          <button class="button button-primary" type="submit">Send message <span aria-hidden="true">↗</span></button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand" href="#top"><span class="brand-mark">RJ</span><span class="brand-name">Raj Anand Jha</span></a>
+    <p>Learning today. Building for tomorrow.</p>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/share/1CPLt6DriE/" target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+      <a href="mailto:shyamashyam53@gmail.com">Email ↗</a>
+      <a href="#top">Back to top ↑</a>
     </div>
-</section>
+    <small>© <span id="year">2026</span> Raj Anand Jha</small>
+  </footer>
 
-<section id="projects" class="projects fade-in">
-    <h2>Projects</h2>
-    <div class="project-card">
-        <h3>COMING SOON</h3>
-        <p>Projects will be added here soon as I continue building and improving my portfolio.</p>
-    </div>
-
-</section>
-
-<section id="contact" class="contact fade-in">
-    <h2>Contact</h2>
-    <p class="contact-intro">Send me a message here and it will be delivered to my Gmail inbox.</p>
-    <form class="contact-form" id="contact-form" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="131a5f5f-e997-4e8c-b881-0fe0b383c198">
-        <input type="hidden" name="subject" value="New message from portfolio contact form">
-        <input type="hidden" name="from_name" value="Portfolio Website">
-        <input type="checkbox" name="botcheck" class="hidden-field" tabindex="-1" autocomplete="off">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Your email" required>
-        <input type="text" name="user_subject" placeholder="Subject" required>
-        <textarea name="message" rows="6" placeholder="Write your message here" required></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-    <p class="contact-email">Or email me directly: <a href="mailto:shyamashyam53@gmail.com">shyamashyam53@gmail.com</a></p>
-</section>
-
-<div class="image-popup" id="image-popup">
-    <div class="image-popup-content">
-        <button type="button" class="image-popup-close" id="close-image-popup">Close</button>
-        <img src="image.jpg.jpg" alt="Full profile" class="full-profile-img">
-    </div>
-</div>
-
-<div class="success-popup" id="success-popup">
-    <div class="success-card">
-        <div class="success-icon">&#10003;</div>
-        <h3>Message Sent Successfully</h3>
-        <p>Thank you for reaching out. Your message has been sent to my inbox and I will get back to you soon.</p>
-        <button type="button" id="close-popup">Close</button>
-    </div>
-</div>
-
-<footer>
-</p>&copy; 2026 Raj anand jha
-</footer>
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
